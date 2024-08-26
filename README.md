@@ -1,0 +1,2 @@
+# CleanArchitectureBaseYapi
+Taner Saydamın yapısıdır.
