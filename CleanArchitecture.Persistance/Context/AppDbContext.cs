@@ -1,10 +1,11 @@
 ﻿using CleanArchitecture.Domain.Abstractions;
+using GenericRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
 namespace CleanArchitecture.Persistance.Context
 {
-    public sealed class AppDbContext : DbContext
+    public sealed class AppDbContext : DbContext,IUnitOfWork
     {
 
 

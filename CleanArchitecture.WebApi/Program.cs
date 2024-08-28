@@ -1,9 +1,12 @@
 using CleanArchitecture.Application.Behaviors;
 using CleanArchitecture.Application.Services;
+using CleanArchitecture.Domain.Repositories;
 using CleanArchitecture.Persistance.Context;
+using CleanArchitecture.Persistance.Repositories;
 using CleanArchitecture.Persistance.Services;
 using CleanArchitecture.WebApi.Middleware;
 using FluentValidation;
+using GenericRepository;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +17,15 @@ builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddTransient<ExceptionMiddleware>();
 
 
+builder.Services.AddScoped<IUnitOfWork>(cfr => cfr.GetRequiredService<AppDbContext>());
+
 builder.Services.AddAutoMapper(typeof(CleanArchitecture.Persistance.AssemblyRefence).Assembly);
 
 // Add services to the container.
 string connectionString = builder.Configuration.GetConnectionString("SqlServer");
+
 builder.Services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(connectionString));
+builder.Services.AddScoped<ICarRepository, CarRepository>();
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(CleanArchitecture.Presentation.AssemblyReference).Assembly);
