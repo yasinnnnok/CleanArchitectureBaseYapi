@@ -10,5 +10,6 @@ public sealed class CarConfuguration : IEntityTypeConfiguration<Car>
     {
         builder.ToTable("Cars");
         builder.HasKey(p=>p.Id);
+        builder.HasIndex(p=>p.Id);
     }
 }
