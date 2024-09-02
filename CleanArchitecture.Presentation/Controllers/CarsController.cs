@@ -14,7 +14,6 @@ public sealed class CarsController : ApiController
 {
 
 
-
     public CarsController(IMediator mediator) : base(mediator) { }
  
 
