@@ -10,10 +10,7 @@ namespace CleanArchitecture.Application.Features.AuthFeatures.Commands.Login
         (string Token,
         string RefreshToken,
         DateTime? RefreshTokenExpires,
-        string UserId,
-        string UserName,
-        string NameLastName,
-        string Email)
+        string UserId)
     {
 
     }
