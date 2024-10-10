@@ -26,8 +26,9 @@ public sealed class JwtProvider : IJwtProvider
     {
         var claims = new Claim[]
         {
-            new Claim(ClaimTypes.Email,user.Email),
-            new Claim(JwtRegisteredClaimNames.Name,user.UserName),
+            new Claim(ClaimTypes.NameIdentifier, user.Id),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(JwtRegisteredClaimNames.Name, user.UserName),
             new Claim("NameLastName",user.NameLastName)
         };
 
@@ -36,16 +37,13 @@ public sealed class JwtProvider : IJwtProvider
         JwtSecurityToken jwtSecurityToken = new(
             issuer: _jwtOptions.Issuer,
             audience: _jwtOptions.Audience,
-            claims: null,
+            claims: claims,
             notBefore: DateTime.Now,
-            expires:expires,
-            signingCredentials: new SigningCredentials(new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(_jwtOptions.SecretKey)), SecurityAlgorithms.HmacSha256)
-            );
+            expires: expires,
+            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.SecretKey)), SecurityAlgorithms.HmacSha256));
 
         string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
 
-        //32 karakterli vermesini isteyelim. expires süresini verleim. ne kadar uzatacak.
         string refreshToken = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
 
         user.RefreshToken = refreshToken;
@@ -55,8 +53,9 @@ public sealed class JwtProvider : IJwtProvider
         LoginCommandResponse response = new(
             token,
             refreshToken,
-           user.RefreshTokenExpires,
+            user.RefreshTokenExpires,
             user.Id);
-        return response ;
+
+        return response;
     }
 }
