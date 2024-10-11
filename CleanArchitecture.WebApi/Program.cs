@@ -23,8 +23,10 @@ builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddTransient<ExceptionMiddleware>()
     ;
 builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRoleServices, RoleService>();
+builder.Services.AddScoped<IUserRoleServices, UserRoleService>();
 
 builder.Services.AddScoped<IUnitOfWork>(cfr => cfr.GetRequiredService<AppDbContext>());
 
