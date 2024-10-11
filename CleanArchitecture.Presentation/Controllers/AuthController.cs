@@ -1,14 +1,10 @@
-﻿using CleanArchitecture.Application.Features.AuthFeatures.Commands.Login;
+﻿using CleanArchitecture.Application.Features.AuthFeatures.Commands.CreateNewTokenByRefreshToken;
+using CleanArchitecture.Application.Features.AuthFeatures.Commands.Login;
 using CleanArchitecture.Application.Features.AuthFeatures.Commands.Register;
 using CleanArchitecture.Domain.Dtos;
 using CleanArchitecture.Presentation.Abstraction;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Presentation.Controllers
 {
@@ -33,12 +29,12 @@ namespace CleanArchitecture.Presentation.Controllers
             return Ok(response);
         }
 
-        //[HttpPost("[action]")]
-        //public async Task<IActionResult> CreateTokenByRefreshToken(CreateNewTokenByRefreshTokenCommand request, CancellationToken cancellationToken)
-        //{
-        //    LoginCommandResponse response = await _mediator.Send(request, cancellationToken);
-        //    return Ok(response);
-        //}
 
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateTokenByRefreshToken(CreateNewTokenRefreshTokenCommand request, CancellationToken cancellationToken)
+        {
+            LoginCommandResponse response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
     }
 }
