@@ -39,6 +39,12 @@ builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 builder.Services.AddAuthentication().AddJwtBearer();
 builder.Services.AddAuthorization();
 
+//withHeader ile site ismi yazýlabilir.
+builder.Services.AddCors(options=>options.AddDefaultPolicy(policy=>
+policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed(policy=>true)
+));
+
+
 builder.Services.AddAutoMapper(typeof(CleanArchitecture.Persistance.AssemblyRefence).Assembly);
 
 // Add services to the container.
@@ -104,6 +110,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
 app.UseMiddlewareExtensions();
 
 
