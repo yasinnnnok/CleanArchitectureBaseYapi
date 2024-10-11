@@ -6,7 +6,7 @@ namespace CleanArchitecture.WebApi.Configurations;
 
 public class PresentationServiceInstaller : IServiceInstaller
 {
-    public void Install(IServiceCollection services, IConfiguration configuration)
+    public void Install(IServiceCollection services, IConfiguration configuration, IHostBuilder host)
     {
 
         //withHeader ile site ismi yazılabilir.

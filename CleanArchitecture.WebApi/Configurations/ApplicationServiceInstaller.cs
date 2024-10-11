@@ -7,7 +7,7 @@ namespace CleanArchitecture.WebApi.Configurations;
 
 public sealed class ApplicationServiceInstaller : IServiceInstaller
 {
-    public void Install(IServiceCollection services, IConfiguration configuration)
+    public void Install(IServiceCollection services, IConfiguration configuration,IHostBuilder host)
     {
         //mediaTr servis registerion u yapıldı
         services.AddMediatR(cfr => cfr.RegisterServicesFromAssembly(typeof(CleanArchitecture.Application.AssemblyReference).Assembly));

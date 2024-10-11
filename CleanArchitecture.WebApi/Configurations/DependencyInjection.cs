@@ -18,8 +18,8 @@ public static class DependencyInjection
 
         foreach (IServiceInstaller serviceInstaller in serviceInstallers)
         {
-           // serviceInstaller.Install(services, configuration, hostBuilder);
-            serviceInstaller.Install(services, configuration);
+           serviceInstaller.Install(services, configuration, hostBuilder);
+     
         }
 
         return services;
